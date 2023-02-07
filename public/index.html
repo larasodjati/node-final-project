@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products List</title>
+</head>
+
+<body>
+    <h1>Products List</h1>
+    <div>
+    <button type="button" id="notification" style="display:none;">Notification</button>
+    </div>
+    <button type="button" id="logoff" style="display:none;">logoff</button>
+    <hr>
+    <p id="message"></p>
+    <hr>
+    <div id="logon-register" style="display:none;">
+        <button type="button" id="logon">logon</button>
+        <button type="button" id="register">register</button>
+    </div>
+    <div id="logon-div" style="display:none;">
+        <form>
+            <div>
+                <label for="email">email:</label>
+                <input type="email" id="email">
+            </div>
+            <div>
+                <label for="password">password:</label>
+                <input type="password" id="password">
+            </div>
+            <button type="button" id="logon-button">logon</button>
+            <button type="button" id="logon-cancel">cancel</button>
+        </form>
+    </div>
+    <div id="register-div" style="display:none;">
+        <form>
+            <div>
+                <label for="name">name:</label>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="email1">email:</label>
+                <input type="email" id="email1">
+            </div>
+            <div>
+                <label for="password1">password:</label>
+                <input type="password" id="password1">
+            </div>
+            <div>
+                <label for="password2">verify password:</label>
+                <input type="password" id="password2">
+            </div>
+            <button type="button" id="register-button">register</button>
+            <button type="button" id="register-cancel">cancel</button>
+        </form>
+    </div>
+    
+    <div id="products" style="display:none;">
+        <p id="products-message"></p>
+        <table id="products-table" style="display:none;">
+            <tr id="products-table-header">
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Opened</th>
+                <th>PAO</th>
+                <th>Exp.Date</th>
+                <th>Status</th>
+                <th colspan="2"></th>
+            </tr>
+        </table>
+        <button type="button" id="add-product">add product</button>
+    </div>
+    <div id = "expired-products" style="display:none;">
+        <h2>Expired Products</h2>
+        <ul class="expired-list">
+
+        </ul>
+    </div>
+    <div id="edit-product" style="display:none;">
+        <form>
+            <div>
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand">
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="Bathbody">Bathbody</option>
+                    <option value="Fragrance">Fragrance</option> 
+                    <option value="Hair">Hair</option> 
+                    <option value="Handfoot">Handfoot</option> 
+                    <option value="Lips">Lips</option> 
+                    <option value="Makeup">Makeup</option>
+                    <option value="Skincare">Skincare</option>
+                    <option value="Vitamin">Vitamin</option>
+                </select>
+            </div>
+            <div>
+                <label for="opened">Product Opened:</label>
+                <input type="date" id="opened">
+            </div>
+            <div>
+                <label for="validity">Period After Open:</label>
+                <input type="text" id="validity">
+            </div>
+            <div>
+                <label for="expirationDate">Exp.Date:</label>
+                <input type="date" id="expirationDate">
+            </div>
+            <div>
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="new">new</option>
+                    <option value="in-use">in-use</option>
+                    <option value="expired">expired</option>
+                </select>
+            </div>
+            <button type="button" id="adding-product">add</button>
+            <button type="button" id="edit-cancel">cancel</button>
+        </form>
+        <form method="post" enctype="multipart/form-data" action="/upload">
+            <input type="file" name="file">
+            <input type="submit" value="Submit">
+        </form>
+        
+        
+    <script src="./products.js"></script>   
+</body>
+</html>
