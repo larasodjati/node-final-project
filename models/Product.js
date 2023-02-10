@@ -31,6 +31,11 @@ const ProductSchema = new mongoose.Schema({
     enum: ['new', 'in-use', 'expired'],
     default: 'new'
   },
+  img:
+  {
+    data: Buffer,
+    contentType: String
+  },
   createdBy: { // tie the product to the actual user
     type: mongoose.Types.ObjectId,
     ref: 'User', // which model that we are referencing

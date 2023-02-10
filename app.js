@@ -18,6 +18,9 @@ const authenticateUser = require('./middleware/authentication') // used in produ
 const authRouter = require('./routes/auth')
 const productsRouter = require('./routes/products')
 
+// upload file
+const upload = require('./utils/uploadFile')
+
 // error handler
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
@@ -39,6 +42,13 @@ app.use(xss())
 // routes
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/products', authenticateUser, productsRouter)
+// routes for upload file
+app.use('/api/v1/products/upload', upload.single('image'), (req, res, next) => {
+  if (!req.file) {
+    return res.send('Please upload a file')
+  }
+  res.send('OK\n')
+})
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
