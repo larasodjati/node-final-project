@@ -10,12 +10,10 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     enum: ['Bathbody', 'Fragrance', 'Hair', 'Handfoot', 'Lips', 'Makeup', 'Skincare', 'Vitamin'],
     default: 'skincare'
-
   },
   opened: {
     type: Date,
     required: [true, '\n Please provide date opened with format: mm-dd-yyyy']
-
   },
   validity: {
     type: Number,
@@ -24,17 +22,11 @@ const ProductSchema = new mongoose.Schema({
   expirationDate: {
     type: Date,
     required: [true, '\n Please provide date opened with format: mm-dd-yyyy']
-
   },
   status: {
     type: String,
     enum: ['new', 'in-use', 'expired'],
     default: 'new'
-  },
-  img:
-  {
-    data: Buffer,
-    contentType: String
   },
   createdBy: { // tie the product to the actual user
     type: mongoose.Types.ObjectId,
