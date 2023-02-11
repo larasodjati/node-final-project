@@ -34,6 +34,7 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           const rowEntry = document.createElement('tr')
           rowEntry.innerHTML = rowHTML
           children.push(rowEntry)
+
         }
         productsTable.replaceChildren(...children)
       }
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
   const notification = document.getElementById('notification')
+  const deleteButton = document.getElementById('delete-account')
 
   // section 2
   let showing = logonRegister
@@ -93,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // if the user is logged in
       notification.style.display = ''
       logoff.style.display = 'block'
+      deleteButton.style.display = 'block'
       const count = await buildProductsTable(
         productsTable,
         productsTableHeader,
@@ -217,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
           message.textContent = 'A communications error occurred.'
         }
         suspendInput = false
-      }
+      } 
     } // section 4
     else if (e.target === addProduct) {
       showing.style.display = 'none'

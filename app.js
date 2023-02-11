@@ -17,6 +17,7 @@ const authenticateUser = require('./middleware/authentication') // used in produ
 // routers
 const authRouter = require('./routes/auth')
 const productsRouter = require('./routes/products')
+const deleteUser = require('./routes/deleteUser')
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found')
@@ -39,6 +40,7 @@ app.use(xss())
 // routes
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/products', authenticateUser, productsRouter)
+app.use('/api/v1/user', authenticateUser, deleteUser)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
