@@ -5,5 +5,4 @@ const deleteUser = require('../controllers/deleteUser')
 
 router.delete('/delete', deleteUser)
 
-
 module.exports = router
