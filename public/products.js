@@ -81,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const addingProduct = document.getElementById('adding-product')
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
-  const notification = document.getElementById('notification')
   const deleteAccount = document.getElementById('delete-account')
 
   // section 2
@@ -92,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
     token = localStorage.getItem('token')
     if (token) {
       // if the user is logged in
-      notification.style.display = ''
       logoff.style.display = 'block'
       deleteAccount.style.display = 'block'
       const count = await buildProductsTable(
@@ -239,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
           logonRegister.style.display = 'block'
           showing = logonRegister
           productsTable.replaceChildren(productsTableHeader) // don't want other users to see
-          message.textContent = 'The user was successfully deleted'
+          message.textContent = 'The user was successfully deleted.'
         } else if (e.target === logon) {
           showing.style.display = 'none'
           logonDiv.style.display = 'block'

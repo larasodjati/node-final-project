@@ -2,7 +2,7 @@ const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 
 const deleteUser = async (req, res) => {
-  const { id } = req.user
+  const { id } = req.params
   try {
     await User.findOneAndDelete({ user: id })
     res.status(StatusCodes.OK).json({ msg: 'The user was deleted' })
