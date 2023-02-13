@@ -82,6 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
   const deleteAccount = document.getElementById('delete-account')
+  const nextButton = document.getElementById('next-button')
+  const prevButton = document.getElementById('prev-button')
 
   // section 2
   let showing = logonRegister

@@ -70,6 +70,25 @@
             </tr>
         </table>
         <button type="button" id="add-product">add product</button>
+        <div id="pagination">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                <li class="active"><a href="http://localhost:3000/v1/api/products?page=1&limit=5">1</a></li>
+                <li><a href="http://localhost:3000/v1/api/products?page=2&limit=5">2</a></li>
+                <li><a href="http://localhost:3000/v1/api/products?page=3&limit=5">3</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+            <!--<button type="button" id="next-button">next</button>
+            <button type="button" id="prev-button">previous</button>-->
+        </div>
     </div>
     
     <div id="edit-product" style="display:none;">
