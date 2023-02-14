@@ -4,22 +4,25 @@ const { BadRequestError, NotFoundError } = require('../errors')
 const { capitalizeProductName, capitalizeProductCategory } = require('../utils/capitalize')
 
 const getAllProducts = async (req, res) => {
-  // adding pagination
-  const { page = 1, limit = 5 } = req.query
-  // get total docs
-  const total = await Product.countDocuments()
-  // sort products alphabetical
-  const sort = { brand: 1 }
-  const products = await Product.find({ createdBy: req.user.userId }).sort(sort)
-    .limit(limit * 1)
-    .skip((page - 1) * limit)
-  // return res with products, total pages, and current page
-  res.status(StatusCodes.OK).json({
-    products,
-    count: products.length,
-    totalPages: Math.ceil(total / limit),
-    currentPage: page
-  })
+  // // adding pagination
+  // const { page = 1, limit = 5 } = req.query
+  // // get total docs
+  // const total = await Product.countDocuments()
+  // // sort products alphabetical
+  // const sort = { brand: 1 }
+  // const products = await Product.find({ createdBy: req.user.userId }).sort(sort)
+  //   .limit(limit * 1)
+  //   .skip((page - 1) * limit)
+  // // return res with products, total pages, and current page
+  // res.status(StatusCodes.OK).json({
+  //   products,
+  //   count: products.length,
+  //   totalPages: Math.ceil(total / limit),
+  //   currentPage: page
+  // })
+  const sort = { brand: 1}
+  const products = await Product.find({ createdBy: req.user.userId}).sort(sort)
+  res.status(StatusCodes.OK).json({ products, count: products.length})
 }
 
 const getProduct = async (req, res) => {
