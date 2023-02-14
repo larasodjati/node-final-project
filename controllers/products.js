@@ -20,9 +20,9 @@ const getAllProducts = async (req, res) => {
   //   totalPages: Math.ceil(total / limit),
   //   currentPage: page
   // })
-  const sort = { brand: 1}
-  const products = await Product.find({ createdBy: req.user.userId}).sort(sort)
-  res.status(StatusCodes.OK).json({ products, count: products.length})
+  const sort = { brand: 1 }
+  const products = await Product.find({ createdBy: req.user.userId }).sort(sort)
+  res.status(StatusCodes.OK).json({ products, count: products.length })
 }
 
 const getProduct = async (req, res) => {

@@ -1,8 +1,10 @@
 const User = require('../models/User')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
+const { capitalizeName } = require('../utils/capitalize')
 
 const register = async (req, res) => {
+  req.body.name = capitalizeName(req.body.name)
   const user = await User.create({ ...req.body })
   const token = user.createJWT()
   res

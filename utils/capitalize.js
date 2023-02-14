@@ -11,4 +11,12 @@ function capitalizeProductCategory (category) {
     .map((str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase())
     .join(' ')
 }
-module.exports = { capitalizeProductName, capitalizeProductCategory }
+
+function capitalizeName (name) {
+  const words = name.split(' ')
+  return words
+    .map((str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase())
+    .join(' ')
+}
+
+module.exports = { capitalizeProductName, capitalizeProductCategory, capitalizeName }
