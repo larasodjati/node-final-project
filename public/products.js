@@ -23,6 +23,10 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           data.products[i].opened = new Date(openedUTC.getTime() + offsetOpened).toLocaleDateString()
 
           // Exp Date
+         
+          if(data.products[i].expirationDate === ''){
+            data.products[i].expirationDate = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth()+data.products[i].validity));
+          }
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
           data.products[i].expirationDate = new Date(expiredUTC.getTime() + offsetExpired).toLocaleDateString()

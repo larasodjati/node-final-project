@@ -5,135 +5,144 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>myBeautyTracker</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Averia+Serif+Libre&family=Balsamiq+Sans&family=Chelsea+Market&family=Fredoka+One&family=Jua&family=Just+Another+Hand&family=Meera+Inimai&family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Product List</h1>
-    <button type="button" id="logoff" style="display:none;">logoff</button>
-    <button type="button" id="delete-account" style="display:none">delete account</button>
-    <hr>
-    <p id="message"></p>
-    <hr>
-    <div id="logon-register" style="display:none;">
-        <button type="button" id="logon">logon</button>
-        <button type="button" id="register">register</button>
-    </div>
-    <div id="logon-div" style="display:none;">
-        <form>
-            <div>
-                <label for="email">email:</label>
-                <input type="email" id="email" placeholder="enter your email">
-            </div>
-            <div>
-                <label for="password">password:</label>
-                <input type="password" id="password" placeholder="enter your password">
-            </div>
-            <button type="button" id="logon-button">logon</button>
-            <button type="button" id="logon-cancel">cancel</button>
-        </form>
-    </div>
-    <div id="register-div" style="display:none;">
-        <form>
-            <div>
-                <label for="name">name:</label>
-                <input type="text" id="name" placeholder="please provide your name">
-            </div>
-            <div>
-                <label for="email1">email:</label>
-                <input type="email" id="email1" placeholder="please provide your valid email">
-            </div>
-            <div>
-                <label for="password1">password:</label>
-                <input type="password" id="password1" placeholder="minimal six characters">
-            </div>
-            <div>
-                <label for="password2">verify password:</label>
-                <input type="password" id="password2" placeholder="re-type password">
-            </div>
-            <button type="button" id="register-button">register</button>
-            <button type="button" id="register-cancel">cancel</button>
-        </form>
-    </div>
+    <div class="container">
+        <header class="main-header">
+            <h1 id="product-list">Product List</h1>
+            <button type="button" id="logoff" style="display:none;">logoff</button>
+            <button type="button" id="delete-account" style="display:none">delete account</button>    
+        </header>
     
-    <div id="products" style="display:none;">
-        <p id="products-message"></p>
-        <table id="products-table" style="display:none;">
-            <tr id="products-table-header">
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Opened</th>
-                <th>PAO</th>
-                <th>Exp.Date</th>
-                <th>Status</th>
-                <th colspan="2"></th>
-            </tr>
-        </table>
-        <button type="button" id="add-product">add product</button>
-        <!--<div id="pagination-container">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-                <li class="active"><a href="http://localhost:3000/v1/api/products?page=1&limit=5">1</a></li>
-                <li><a href="http://localhost:3000/v1/api/products?page=2&limit=5">2</a></li>
-                <li><a href="http://localhost:3000/v1/api/products?page=3&limit=5">3</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-            <!--<button type="button" id="next-button">next</button>
-            <button type="button" id="prev-button">previous</button>
-        </div>-->
-    </div>
+        <hr>
+        <p id="message"></p>
+        <hr>
+        <div id="logon-register" style="display:none;">
+            <button type="button" id="logon">logon</button>
+            <button type="button" id="register">register</button>
+        </div>
+        <div id="logon-div" style="display:none;">
+            <form>
+                <div>
+                    <label for="email" class="email-logon">email:</label>
+                    <input type="email" id="email" class="input-logon" placeholder="enter your email">
+                </div>
+                <div>
+                    <label for="password" class="password-logon">password:</label>
+                    <input type="password" id="password" class="input-logon" placeholder="enter your password">
+                </div>
+                <button type="button" id="logon-button">logon</button>
+                <button type="button" id="logon-cancel">cancel</button>
+            </form>
+        </div>
+        <div id="register-div" style="display:none;">
+            <form>
+                <div>
+                    <label for="name" class="name">name:</label>
+                    <input type="text" id="name" class="input-register" placeholder="please provide your name">
+                </div>
+                <div>
+                    <label for="email1" class="email">email:</label>
+                    <input type="email" id="email1" class="input-register" placeholder="please provide your valid email">
+                </div>
+                <div>
+                    <label for="password1" class="password">password:</label>
+                    <input type="password" id="password1" class="input-register" placeholder="minimal six characters">
+                </div>
+                <div>
+                    <label for="password2" class="password">verify password:</label>
+                    <input type="password" id="password2" class="input-register" placeholder="re-type password">
+                </div>
+                <button type="button" id="register-button">register</button>
+                <button type="button" id="register-cancel">cancel</button>
+            </form>
+        </div>
     
-    <div id="edit-product" style="display:none;">
-        <form>
-            <div>
-                <label for="brand">Brand:</label>
-                <input type="text" id="brand" placeholder="brand name">
-            </div>
-            <div>
-                <label for="category">Category:</label>
-                <select id="category">
-                    <option value="Bathbody">Bathbody</option>
-                    <option value="Fragrance">Fragrance</option> 
-                    <option value="Hair">Hair</option> 
-                    <option value="Handfoot">Handfoot</option> 
-                    <option value="Lips">Lips</option> 
-                    <option value="Makeup">Makeup</option>
-                    <option value="Skincare">Skincare</option>
-                    <option value="Vitamin">Vitamin</option>
-                </select>
-            </div>
-            <div>
-                <label for="opened">Product Opened:</label>
-                <input type="date" id="opened">
-            </div>
-            <div>
-                <label for="validity">Period After Open:</label>
-                <input type="text" id="validity" placeholder="in months">
-            </div>
-            <div>
-                <label for="expirationDate">Exp.Date:</label>
-                <input type="date" id="expirationDate">
-            </div>
-            <div>
-                <label for="status">Status:</label>
-                <select id="status">
-                    <option value="new">new</option>
-                    <option value="in-use">in-use</option>
-                    <option value="expired">expired</option>
-                </select>
-            </div>
-            <button type="button" id="adding-product">add</button>
-            <button type="button" id="edit-cancel">cancel</button>
-        </form>
+        <div id="products" style="display:none;">
+            <p id="products-message"></p>
+            <table id="products-table" style="display:none;">
+                <tr id="products-table-header">
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Opened</th>
+                    <th>PAO</th>
+                    <th>Exp.Date</th>
+                    <th>Status</th>
+                    <th colspan="2"></th>
+                </tr>
+            </table>
+            <button type="button" id="add-product">add product</button>
+            <!--<div id="pagination-container">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="http://localhost:3000/v1/api/products?page=1&limit=5">1</a></li>
+                    <li><a href="http://localhost:3000/v1/api/products?page=2&limit=5">2</a></li>
+                    <li><a href="http://localhost:3000/v1/api/products?page=3&limit=5">3</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--<button type="button" id="next-button">next</button>
+                <button type="button" id="prev-button">previous</button>
+            </div>-->
+        </div>
         
-    <script src="./products.js"></script>   
+        <div id="edit-product" style="display:none;">
+            <form>
+                <div>
+                    <label for="brand" class="label-product">Brand:</label>
+                    <input type="text" id="brand" class="input-product" placeholder="brand name">
+                </div>
+                <div>
+                    <label for="category">Category:</label>
+                    <select id="category" class="input-product">
+                        <option value="Bathbody">Bathbody</option>
+                        <option value="Fragrance">Fragrance</option> 
+                        <option value="Hair">Hair</option> 
+                        <option value="Handfoot">Handfoot</option> 
+                        <option value="Lips">Lips</option> 
+                        <option value="Makeup">Makeup</option>
+                        <option value="Skincare">Skincare</option>
+                        <option value="Vitamin">Vitamin</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="opened">Product Opened:</label>
+                    <input type="date" id="opened" class="input-product">
+                </div>
+                <div>
+                    <label for="validity">Period After Open:</label>
+                    <input type="text" id="validity" class="input-product" placeholder="in months">
+                </div>
+                <div>
+                    <label for="expirationDate">Exp.Date:</label>
+                    <input type="date" id="expirationDate" class="input-product">
+                </div>
+                <div>
+                    <label for="status">Status:</label>
+                    <select id="status" class="input-product">
+                        <option value="new">new</option>
+                        <option value="in-use">in-use</option>
+                        <option value="expired">expired</option>
+                    </select>
+                </div>
+                <button type="button" id="adding-product">add</button>
+                <button type="button" id="edit-cancel">cancel</button>
+            </form>
+            
+        <script src="./products.js"></script>   
+    </div>
 </body>
 </html>
