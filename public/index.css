@@ -7,14 +7,12 @@ body{
     font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
     background:#FEEFDE;
-
-
- 
    
 }
 .container {
     width: 50%;
-    margin: 150px 200px 200px 450px; 
+    /* margin: 150px 200px 200px 450px;  */
+    margin: 0 auto;
     background: #DAE3E6;
     padding: 50px 100px 100px 100px;
     
@@ -24,6 +22,7 @@ body{
     font-size: 3.5rem;
     font-weight: bold;
     font-family: "Amatic SC", Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
 }
 
 .input-logon,
@@ -57,13 +56,40 @@ button:hover{
     color:#0a0a0a;
     font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1.25rem;
-  
     border:  solid;
     border-color: #7C8B9A;
     padding: 5px 5px;
     border-radius: 4px;
-   
-
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+  th, td {
+    text-align: center;
+    padding: 8px;
+}
+  
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
+.input-logon,
+.input-register{
+    float: right;
+    width: 75%;
+    margin-top: 10px;
+}
+.input-product{
+    float: right;
+    width: 50%;
+    margin-top: 5px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

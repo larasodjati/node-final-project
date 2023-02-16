@@ -29,11 +29,11 @@
         </div>
         <div id="logon-div" style="display:none;">
             <form>
-                <div>
+                <div class="row">
                     <label for="email" class="email-logon">email:</label>
                     <input type="email" id="email" class="input-logon" placeholder="enter your email">
                 </div>
-                <div>
+                <div class="row">
                     <label for="password" class="password-logon">password:</label>
                     <input type="password" id="password" class="input-logon" placeholder="enter your password">
                 </div>
@@ -43,19 +43,19 @@
         </div>
         <div id="register-div" style="display:none;">
             <form>
-                <div>
+                <div class="row">
                     <label for="name" class="name">name:</label>
                     <input type="text" id="name" class="input-register" placeholder="please provide your name">
                 </div>
-                <div>
+                <div class="row">
                     <label for="email1" class="email">email:</label>
                     <input type="email" id="email1" class="input-register" placeholder="please provide your valid email">
                 </div>
-                <div>
+                <div class="row">
                     <label for="password1" class="password">password:</label>
-                    <input type="password" id="password1" class="input-register" placeholder="minimal six characters">
+                    <input type="password" id="password1" class="input-register" placeholder="minimal eight characters">
                 </div>
-                <div>
+                <div class="row">
                     <label for="password2" class="password">verify password:</label>
                     <input type="password" id="password2" class="input-register" placeholder="re-type password">
                 </div>
@@ -78,35 +78,16 @@
                 </tr>
             </table>
             <button type="button" id="add-product">add product</button>
-            <!--<div id="pagination-container">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">«</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="http://localhost:3000/v1/api/products?page=1&limit=5">1</a></li>
-                    <li><a href="http://localhost:3000/v1/api/products?page=2&limit=5">2</a></li>
-                    <li><a href="http://localhost:3000/v1/api/products?page=3&limit=5">3</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
-                <!--<button type="button" id="next-button">next</button>
-                <button type="button" id="prev-button">previous</button>
-            </div>-->
         </div>
         
         <div id="edit-product" style="display:none;">
             <form>
-                <div>
+                <div class="row">
                     <label for="brand" class="label-product">Brand:</label>
                     <input type="text" id="brand" class="input-product" placeholder="brand name">
                 </div>
-                <div>
-                    <label for="category">Category:</label>
+                <div class="row">
+                    <label for="category" class="label-product">Category:</label>
                     <select id="category" class="input-product">
                         <option value="Bathbody">Bathbody</option>
                         <option value="Fragrance">Fragrance</option> 
@@ -118,20 +99,20 @@
                         <option value="Vitamin">Vitamin</option>
                     </select>
                 </div>
-                <div>
-                    <label for="opened">Product Opened:</label>
+                <div class="row">
+                    <label for="opened" label="label-product">Product Opened:</label>
                     <input type="date" id="opened" class="input-product">
                 </div>
-                <div>
-                    <label for="validity">Period After Open:</label>
+                <div class="row">
+                    <label for="validity" label="label-product">Period After Open:</label>
                     <input type="text" id="validity" class="input-product" placeholder="in months">
                 </div>
-                <div>
-                    <label for="expirationDate">Exp.Date:</label>
+                <div class="row">
+                    <label for="expirationDate" label="label-product">Exp.Date:</label>
                     <input type="date" id="expirationDate" class="input-product">
                 </div>
-                <div>
-                    <label for="status">Status:</label>
+                <div class="row">
+                    <label for="status" label="label-product">Status:</label>
                     <select id="status" class="input-product">
                         <option value="new">new</option>
                         <option value="in-use">in-use</option>

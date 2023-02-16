@@ -20,8 +20,8 @@ const ProductSchema = new mongoose.Schema({
     required: [true, '\n Please provide validity with number']
   },
   expirationDate: {
-    type: Date,
-    //required: [true, '\n Please provide exp.date with format: mm-dd-yyyy']
+    type: String
+    // required: [true, '\n Please provide exp.date with format: mm-dd-yyyy']
   },
   status: {
     type: String,

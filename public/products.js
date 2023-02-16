@@ -23,9 +23,9 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           data.products[i].opened = new Date(openedUTC.getTime() + offsetOpened).toLocaleDateString()
 
           // Exp Date
-         
-          if(data.products[i].expirationDate === ''){
-            data.products[i].expirationDate = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth()+data.products[i].validity));
+
+          if (data.products[i].expirationDate === '') {
+            data.products[i].expirationDate = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth() + data.products[i].validity))
           }
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
@@ -86,10 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
   const deleteAccount = document.getElementById('delete-account')
-  // const nextButton = document.getElementById('next-button')
-  // const prevButton = document.getElementById('prev-button')
-  // const paginationContainer = document.getElementById('pagination-container')
-  // const paginationList = document.getElementsByClassName('pagination')
 
   // section 2
   let showing = logonRegister
@@ -174,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         const data = await response.json()
         if (response.status === 200) {
-          message.textContent = `Logon successful.  Welcome ${data.user.name}`
+          message.textContent = `Logon successful.  Welcome ${data.user.name}!`
           token = data.token
           localStorage.setItem('token', token)
           showing.style.display = 'none'
@@ -208,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
           })
           const data = await response.json()
           if (response.status === 201) {
-            message.textContent = `Registration successful.  Welcome ${data.user.name}`
+            message.textContent = `Registration successful.  Welcome ${data.user.name}!`
             token = data.token
             localStorage.setItem('token', token)
             showing.style.display = 'none'
@@ -278,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
       showing = editProduct
       delete editProduct.dataset.id
       brand.value = ''
-      category.value = 'skincare'
+      category.value = 'Skincare'
       opened.value = ''
       validity.value = ''
       expirationDate.value = ''
@@ -287,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.target === editCancel) {
       showing.style.display = 'none'
       brand.value = ''
-      category.value = 'skincare'
+      category.value = 'Skincare'
       opened.value = ''
       validity.value = ''
       expirationDate.value = ''
@@ -322,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
             brand.value = ''
-            category.value = 'skincare'
+            category.value = 'Skincare'
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
@@ -361,7 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
             message.textContent = 'The entry was updated.'
             showing.style.display = 'none'
             brand.value = ''
-            category.value = 'skincare'
+            category.value = 'Skincare'
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
