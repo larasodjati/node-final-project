@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
   const deleteAccount = document.getElementById('delete-account')
+  const h1 = document.querySelector('h1')
 
   // section 2
   let showing = logonRegister
@@ -95,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     token = localStorage.getItem('token')
     if (token) {
       // if the user is logged in
+      h1.innerText = 'Product List'
       logoff.style.display = 'block'
       deleteAccount.style.display = 'block'
       const count = await buildProductsTable(
@@ -136,7 +138,10 @@ document.addEventListener('DOMContentLoaded', () => {
       logonRegister.style.display = 'block'
       showing = logonRegister
       productsTable.replaceChildren(productsTableHeader) // don't want other users to see
+      h1.innerText = 'My Beauty Tracker'
       message.textContent = 'You are logged off.'
+      logoff.style.display = 'none'
+      deleteAccount.style.display = 'none'
     } else if (e.target === logon) {
       showing.style.display = 'none'
       logonDiv.style.display = 'block'

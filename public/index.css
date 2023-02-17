@@ -2,21 +2,27 @@
     box-sizing: border-box;
     color:#0a0a0a;
 }
+
 body{
     font-size: 1.7rem;
     font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
-    background:#FEEFDE;
-   
+    /*royalty free images from pexels*/
+    background-size: 55%;
+    background-image: url(./final/pexels-vie-studio-4857813.jpg), url(./final/pexels-ready-made-3847489_edit.jpg);
+    background-repeat: no-repeat;
+    background-position: left, right;
+    
+  
 }
+
 .container {
     width: 50%;
-    /* margin: 150px 200px 200px 450px;  */
     margin: 0 auto;
     background: #DAE3E6;
     padding: 50px 100px 100px 100px;
     
-  }
+}
 
 #product-list{
     font-size: 3.5rem;
@@ -31,6 +37,7 @@ body{
     font-size : 1.5rem;
     font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .name,
 .email,
 .password,
@@ -39,9 +46,10 @@ body{
     font-size : 2.5rem;
     font-family: "Amatic SC", Calibri, Verdana, Geneva, Tahoma, sans-serif;
 }
+
 button:hover{
     text-transform: uppercase;
-    cursor: pointer;
+    cursor: url(./final/brushh.png), pointer; /*free icon from flaticon*/
 }
 
 #logon,
@@ -58,8 +66,23 @@ button:hover{
     font-size: 1.25rem;
     border:  solid;
     border-color: #7C8B9A;
+    margin: 5px;
     padding: 5px 5px;
     border-radius: 4px;
+}
+#logon,
+#register,
+#register-button,
+#register-cancel,
+#logon-button,
+#logon-cancel {
+    float: right;
+}
+
+button:active {
+    background-color:#AAD6A0 ;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 table {
@@ -82,6 +105,7 @@ tr:nth-child(even) {
     width: 75%;
     margin-top: 10px;
 }
+
 .input-product{
     float: right;
     width: 50%;
@@ -92,4 +116,5 @@ tr:nth-child(even) {
     content: "";
     display: table;
     clear: both;
-  }
+}
+

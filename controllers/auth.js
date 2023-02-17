@@ -7,6 +7,7 @@ const register = async (req, res) => {
   req.body.name = capitalizeName(req.body.name)
   const user = await User.create({ ...req.body })
   const token = user.createJWT()
+
   res
     .status(StatusCodes.CREATED)
     .json({ user: { name: user.name }, token })

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myBeautyTracker</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Averia+Serif+Libre&family=Balsamiq+Sans&family=Chelsea+Market&family=Fredoka+One&family=Jua&family=Just+Another+Hand&family=Meera+Inimai&family=Poppins&display=swap" rel="stylesheet">
@@ -15,13 +16,22 @@
 <body>
     <div class="container">
         <header class="main-header">
-            <h1 id="product-list">Product List</h1>
-            <button type="button" id="logoff" style="display:none;">logoff</button>
-            <button type="button" id="delete-account" style="display:none">delete account</button>    
+            <div class="button-container">
+                <div class="myButtons">
+                    <div>
+                        <button type="button" id="logoff" style="display:none">logoff</button>
+                    </div>
+                    <div>
+                        <button type="button" id="delete-account" style="display:none">delete account</button> 
+                    </div>
+                </div>  
+                
+            </div>
+            <h1 id="product-list">My Beauty Tracker</h1>     
         </header>
     
         <hr>
-        <p id="message"></p>
+        <p id="message">Please register your info or press the logon button.</p>
         <hr>
         <div id="logon-register" style="display:none;">
             <button type="button" id="logon">logon</button>
@@ -45,7 +55,7 @@
             <form>
                 <div class="row">
                     <label for="name" class="name">name:</label>
-                    <input type="text" id="name" class="input-register" placeholder="please provide your name">
+                    <input type="text" id="name" class="input-register" placeholder="enter your name">
                 </div>
                 <div class="row">
                     <label for="email1" class="email">email:</label>
@@ -53,7 +63,7 @@
                 </div>
                 <div class="row">
                     <label for="password1" class="password">password:</label>
-                    <input type="password" id="password1" class="input-register" placeholder="minimal eight characters">
+                    <input type="password" id="password1" class="input-register" placeholder="minimal 8 character">
                 </div>
                 <div class="row">
                     <label for="password2" class="password">verify password:</label>
