@@ -23,10 +23,22 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           data.products[i].opened = new Date(openedUTC.getTime() + offsetOpened).toLocaleDateString()
 
           // Exp Date
-
-          if (data.products[i].expirationDate === '') {
-            data.products[i].expirationDate = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth() + data.products[i].validity))
+          // if exp date is not available and only open date and validity available
+          const calculationExp = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth() + data.products[i].validity))
+          if (data.products[i].expirationDate === null) {
+            data.products[i].expirationDate = calculationExp
           }
+          // if open date, validity, exp available
+          //  condition 1: exp date still far from product validity after open, exp date: use the calculation above
+          if (calculationExp < new Date(data.products[i].expirationDate)) {
+            data.products[i].expirationDate = calculationExp
+          }
+
+          // condition 2: exp date less than product validity afater open, exp date: as input
+          if (calculationExp > new Date(data.products[i].expirationDate)) {
+            data.products[i].expirationDate = new Date(data.products[i].expirationDate)
+          }
+
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
           data.products[i].expirationDate = new Date(expiredUTC.getTime() + offsetExpired).toLocaleDateString()
@@ -91,9 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // section 2
   let showing = logonRegister
   let token = null
+
   document.addEventListener('startDisplay', async () => {
     showing = logonRegister
     token = localStorage.getItem('token')
+
     if (token) {
       // if the user is logged in
       h1.innerText = 'Product List'
@@ -352,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
               category: category.value,
               opened: opened.value,
               validity: validity.value,
-              expirationDate: expirationDate.value,
+              expirationDate: expirationDate.value, // new Date(expirationDate.value).toISOString(),
               status: status.value
             })
           })

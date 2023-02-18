@@ -44,7 +44,7 @@ const updateProduct = async (req, res) => {
   req.body.category = capitalizeProductCategory(req.body.category)
 
   if (brand === '' || category === '' || opened === '' || validity === '' || expirationDate === '') {
-    throw new BadRequestError('Brand, Category, Opened, Validity, and Expiration Date fields cannot be empty')
+    throw new BadRequestError('All fields must be filled in')
   }
   const product = await Product.findByIdAndUpdate({ _id: productId, createdBy: userId }, req.body, {
     new: true,
