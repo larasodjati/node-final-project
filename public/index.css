@@ -1,26 +1,24 @@
 *{
     box-sizing: border-box;
-    color:#0a0a0a;
+    /* color:#0a0a0a; */
 }
 
 body{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
     /*royalty free images from pexels*/
-    background-size: 55%;
     background-image: url(./final/pexels-vie-studio-4857813.jpg), url(./final/pexels-ready-made-3847489_edit.jpg);
+    background-size: 60%, 55%;
     background-repeat: no-repeat;
     background-position: left, right;
-    
-  
 }
 
 .container {
     width: 50%;
     margin: 0 auto;
     background: #DAE3E6;
-    padding: 50px 100px 100px 50px;
+    padding: 25px 100px 100px 50px;
     
 }
 
@@ -99,11 +97,35 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-.input-logon,
+.email-logon,
+.password-logon{
+    float: left;
+    width: 30%;
+}
+
+.input-logon{
+    float: right;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.name,
+.email,
+.password{
+    float: left;
+    width: 40%
+}
+
 .input-register{
     float: right;
-    width: 75%;
+    width: 60%;
     margin-top: 10px;
+}
+
+.label-product{
+    float: left;
+    width: 50%;
+
 }
 
 .input-product{
@@ -118,3 +140,46 @@ tr:nth-child(even) {
     clear: both;
 }
 
+
+/* On screens that are max px wide */
+
+@media screen and (max-width: 769px){
+    body{
+        background-size: 125%;
+        background-image: url(./final/pexels-vie-studio-4857813.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        font-size:medium;
+       
+    }
+
+    .email-logon,
+    .password-logon,
+    .input-logon,
+    .name,
+    .email,
+    .password,
+    .input-register,
+    .label-product,
+    .input-product{
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .container{
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    table {
+        align-items: center;
+        width: 100%;
+    
+    }
+    th, td {
+        text-align: center;
+        padding: 6px;
+    }
+      
+
+}

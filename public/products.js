@@ -22,23 +22,27 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           const offsetOpened = openedUTC.getTimezoneOffset() * 60000
           data.products[i].opened = new Date(openedUTC.getTime() + offsetOpened).toLocaleDateString()
 
-          // Exp Date
           // if exp date is not available and only open date and validity available
+          // condition 1:  only open date and validity(PAO) available, exp date: use calculationExp
           const calculationExp = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth() + data.products[i].validity))
           if (data.products[i].expirationDate === null) {
             data.products[i].expirationDate = calculationExp
           }
           // if open date, validity, exp available
-          //  condition 1: exp date still far from product validity after open, exp date: use the calculation above
+          //  condition 2: exp date still far from product validity after open, exp date: use the calculation above
           if (calculationExp < new Date(data.products[i].expirationDate)) {
             data.products[i].expirationDate = calculationExp
           }
 
-          // condition 2: exp date less than product validity afater open, exp date: as input
+          // condition 3: exp date less than product validity afater open, exp date: as input
           if (calculationExp > new Date(data.products[i].expirationDate)) {
             data.products[i].expirationDate = new Date(data.products[i].expirationDate)
           }
-
+          // if today passed the expiration date, the status of product will change automatically to expired
+          if (new Date() > new Date(data.products[i].expirationDate)) {
+            data.products[i].status = 'expired'
+          }
+          // Expiration Date
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
           data.products[i].expirationDate = new Date(expiredUTC.getTime() + offsetExpired).toLocaleDateString()
@@ -337,11 +341,11 @@ document.addEventListener('DOMContentLoaded', () => {
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
             brand.value = ''
-            category.value = 'Skincare'
+            category.value = ''
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
-            status.value = 'new'
+            status.value = ''
           } else {
             // failure
             message.textContent = data.msg
@@ -366,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
               category: category.value,
               opened: opened.value,
               validity: validity.value,
-              expirationDate: expirationDate.value, // new Date(expirationDate.value).toISOString(),
+              expirationDate: expirationDate.value,
               status: status.value
             })
           })
@@ -376,11 +380,11 @@ document.addEventListener('DOMContentLoaded', () => {
             message.textContent = 'The entry was updated.'
             showing.style.display = 'none'
             brand.value = ''
-            category.value = 'Skincare'
+            category.value = ''
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
-            status.value = 'new'
+            status.value = ''
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
           } else {
