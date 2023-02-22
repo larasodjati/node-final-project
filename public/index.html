@@ -63,7 +63,7 @@
                 </div>
                 <div class="row">
                     <label for="password1" class="password">password:</label>
-                    <input type="password" id="password1" class="input-register" placeholder="minimal 8 characters">
+                    <input type="password" id="password1" class="input-register" placeholder="min. 8 characters">
                 </div>
                 <div class="row">
                     <label for="password2" class="password">verify password:</label>
@@ -73,7 +73,7 @@
                 <button type="button" id="register-cancel">cancel</button>
             </form>
         </div>
-    
+        
         <div id="products" style="display:none;">
             <p id="products-message"></p>
             <table id="products-table" style="display:none;">
@@ -90,6 +90,12 @@
             <button type="button" id="add-product">add product</button>
         </div>
         
+        <div id="table-information" style="display:none">
+            <h4>Table Information</h4>
+            <p><i>&#42 Opened: Date when the the product has been opened for the first time </i></p>
+            <p><i>&#42 PAO: Period after opening that identifies the useful lifetime of a product after opened</i></p>
+        </div>
+
         <div id="edit-product" style="display:none;">
             <form>
                 <div class="row">
@@ -106,7 +112,7 @@
                         <option value="Lips">Lips</option> 
                         <option value="Makeup">Makeup</option>
                         <option value="Skincare">Skincare</option>
-                        <option value="Vitamin">Vitamin</option>
+                        <option value="Sunscreen">Sunscreen</option>
                     </select>
                 </div>
                 <div class="row">
@@ -114,7 +120,7 @@
                     <input type="date" id="opened" class="input-product">
                 </div>
                 <div class="row">
-                    <label for="validity" label="label-product">Period After Open(validity):</label>
+                    <label for="validity" label="label-product">Period After Opening(validity):</label>
                     <input type="text" id="validity" class="input-product" placeholder="in months">
                 </div>
                 <div class="row">
@@ -132,6 +138,7 @@
                 <button type="button" id="adding-product">add</button>
                 <button type="button" id="edit-cancel">cancel</button>
             </form>
+            
         <script src="./products.js"></script>   
     </div>
 </body>

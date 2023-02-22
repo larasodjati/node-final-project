@@ -38,10 +38,12 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           if (calculationExp > new Date(data.products[i].expirationDate)) {
             data.products[i].expirationDate = new Date(data.products[i].expirationDate)
           }
-          // if today passed the expiration date, the status of product will change automatically to expired
-          if (new Date() > new Date(data.products[i].expirationDate)) {
+          // if today passed the expiration date/today is the expiration date, the status of product will change automatically to expired
+
+          if (new Date() > new Date(data.products[i].expirationDate) || new Date() === new Date(data.products[i].expirationDate)) {
             data.products[i].status = 'expired'
           }
+
           // Expiration Date
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
@@ -54,6 +56,11 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           const rowEntry = document.createElement('tr')
           rowEntry.innerHTML = rowHTML
           children.push(rowEntry)
+
+          // change font color for whole row when product expired
+          if (data.products[i].status === 'expired') {
+            rowEntry.style.color = '#e43d40'
+          }
         }
         productsTable.replaceChildren(...children)
       }
@@ -103,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const editCancel = document.getElementById('edit-cancel')
   const deleteAccount = document.getElementById('delete-account')
   const h1 = document.querySelector('h1')
+  const tableInformation = document.getElementById('table-information')
 
   // section 2
   let showing = logonRegister
@@ -126,9 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (count > 0) {
         productsMessage.textContent = ''
         productsTable.style.display = 'block'
+        tableInformation.style.display = 'block'
       } else {
         productsMessage.textContent = 'There are no products to display for this user.'
         productsTable.style.display = 'none'
+        tableInformation.style.display = 'none'
       }
       products.style.display = 'block'
       showing = products
@@ -160,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       message.textContent = 'You are logged off.'
       logoff.style.display = 'none'
       deleteAccount.style.display = 'none'
+      tableInformation.style.display = 'none'
     } else if (e.target === logon) {
       showing.style.display = 'none'
       logonDiv.style.display = 'block'
@@ -303,6 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
       expirationDate.value = ''
       status.value = 'new'
       addingProduct.textContent = 'add'
+      tableInformation.style.display = 'none'
     } else if (e.target === editCancel) {
       showing.style.display = 'none'
       brand.value = ''
@@ -397,6 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
       suspendInput = false
     } // section 5
     else if (e.target.classList.contains('editButton')) {
+      tableInformation.style.display = 'none'
       editProduct.dataset.id = e.target.dataset.id
       suspendInput = true
       try {

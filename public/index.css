@@ -18,8 +18,7 @@ body{
     width: 50%;
     margin: 0 auto;
     background: #DAE3E6;
-    padding: 25px 100px 100px 50px;
-    
+    padding: 25px 100px 100px 50px; 
 }
 
 #product-list{
@@ -125,7 +124,6 @@ tr:nth-child(even) {
 .label-product{
     float: left;
     width: 50%;
-
 }
 
 .input-product{
@@ -138,6 +136,14 @@ tr:nth-child(even) {
     content: "";
     display: table;
     clear: both;
+}
+
+#table-information{
+    font-size: 1.2rem;
+    margin-top: 50px;
+    border: solid #666;
+    border-width: 1px;
+    padding: 5px;
 }
 
 
