@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Averia+Serif+Libre&family=Balsamiq+Sans&family=Chelsea+Market&family=Fredoka+One&family=Jua&family=Just+Another+Hand&family=Meera+Inimai&family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Averia+Serif+Libre&family=Balsamiq+Sans&family=Chelsea+Market&family=Fredoka+One&family=Dongle&family=Jua&family=Just+Another+Hand&family=Meera+Inimai&family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,14 +21,13 @@
                     <div>
                         <button type="button" id="logoff" style="display:none">logoff</button>
                     </div>
-                    <div>
-                        <button type="button" id="delete-account" style="display:none">delete account</button> 
-                    </div>
-                </div>  
-                
-            </div>
-            <h1 id="product-list">My Beauty Tracker</h1>     
+                </div>     
+            </div>    
         </header>
+        <br>
+        <div>
+            <h1 id="product-list">My Beauty Tracker</h1>
+        </div>     
         
         <hr>
         <p id="message"></p>
@@ -95,7 +94,7 @@
             <p><i>&#42 Opened: Date when the the product has been opened for the first time </i></p>
             <p><i>&#42 PAO: Period after opening that identifies the useful lifetime of a product after opened</i></p>
         </div>
-
+       
         <div id="edit-product" style="display:none;">
             <form>
                 <div class="row">
@@ -132,13 +131,21 @@
                     <select id="status" class="input-product">
                         <option value="new">new</option>
                         <option value="in-use">in-use</option>
+                        <option value="expiring soon">expiring soon</option>
                         <option value="expired">expired</option>
                     </select>
                 </div>
                 <button type="button" id="adding-product">add</button>
                 <button type="button" id="edit-cancel">cancel</button>
             </form>
-            
+        </div>
+        <br>
+        <div>
+            <button type="button" id="delete-account" style="display:none">delete account</button> 
+        </div>
+        <footer id="footer">
+            Copyright&copy; 2023 Larasati Sodjati
+        </footer>
         <script src="./products.js"></script>   
     </div>
 </body>

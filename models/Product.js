@@ -24,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['new', 'in-use', 'expired'],
+    enum: ['new', 'in-use', 'expiring soon', 'expired'],
     required: [true, '\n Please choose the status'],
     default: 'new'
   },

@@ -1,24 +1,29 @@
 *{
     box-sizing: border-box;
-    /* color:#0a0a0a; */
 }
 
 body{
-    font-size: 1.5rem;
-    font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2rem;
+    font-family: "Dongle", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
-    /*royalty free images from pexels*/
-    background-image: url(./final/pexels-vie-studio-4857813.jpg), url(./final/pexels-ready-made-3847489_edit.jpg);
-    background-size: 60%, 55%;
+    /*copyright free images from pexels*/
+    background-image: url(./final/1.jpg);
     background-repeat: no-repeat;
-    background-position: left, right;
+    background-position: center;
+    background-size: cover;
+  
 }
 
 .container {
     width: 50%;
     margin: 0 auto;
-    background: #DAE3E6;
-    padding: 25px 100px 100px 50px; 
+    background: #c1cbb9 ;
+    padding: 50px 100px 100px 100px; 
+    border-radius: 20px;
+}
+
+h1{
+    text-align: center;
 }
 
 #product-list{
@@ -32,7 +37,8 @@ body{
 .input-register,
 .input-product{
     font-size : 1.5rem;
-    font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Dongle", Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 10px;
 }
 
 .name,
@@ -57,24 +63,25 @@ button:hover{
 #register-cancel,
 #logoff,
 #delete-account{
-    background-color: #DEAF5F;
-    color:#0a0a0a;
-    font-family: "Jua", Calibri, Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.25rem;
+    background-color: #20323E;
+    font-family: "Dongle", Calibri, Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.5rem;
     border:  solid;
-    border-color: #7C8B9A;
-    margin: 5px;
-    padding: 5px 5px;
-    border-radius: 4px;
+    color: #D7D7D7;
+    margin: 10px;
+    padding: 0 5px;
+    border-radius: 20px;
 }
 #logon,
 #register,
 #register-button,
 #register-cancel,
 #logon-button,
-#logon-cancel {
+#logon-cancel,
+#logoff {
     float: right;
 }
+
 
 button:active {
     background-color:#AAD6A0 ;
@@ -93,7 +100,7 @@ table {
 }
   
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #dfdfda;
 }
 
 .email-logon,
@@ -139,13 +146,21 @@ tr:nth-child(even) {
 }
 
 #table-information{
+    text-align: center;
     font-size: 1.2rem;
-    margin-top: 50px;
+    margin-top: 25px;
     border: solid #666;
     border-width: 1px;
-    padding: 5px;
+    padding: 3px;
 }
 
+#footer{
+    position: relative;
+    text-align: center;
+    margin-top: 100px;
+    bottom:10px;
+
+}
 
 /* On screens that are max px wide */
 

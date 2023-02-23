@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
+    required: [true, '\n Please provide email'],
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       'Please provide valid email'
@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide password'],
-    minlength: [8, 'Password must contain a minimum of 8 characters']
+    required: [true, '\n Please provide password'],
+    minlength: [8, '\n Password must contain a minimum of 8 characters']
     // maxlength: 12,-->removed bcs hashed password generated more than 12 char
   }
 

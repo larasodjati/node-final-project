@@ -38,9 +38,15 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           if (calculationExp > new Date(data.products[i].expirationDate)) {
             data.products[i].expirationDate = new Date(data.products[i].expirationDate)
           }
-          // if today passed the expiration date/today is the expiration date, the status of product will change automatically to expired
 
-          if (new Date() > new Date(data.products[i].expirationDate) || new Date() === new Date(data.products[i].expirationDate)) {
+          // status change to expiring soon : 7 days before exp date
+          const oneWeek = new Date(new Date(data.products[i].expirationDate).setDate(new Date(data.products[i].expirationDate).getDate() - 7))
+          if (oneWeek < new Date()) {
+            data.products[i].status = 'expiring soon'
+          }
+
+          // if today passed the expiration date/today is the expiration date, the status of product will change automatically to expired
+          if (new Date() >= new Date(data.products[i].expirationDate)) {
             data.products[i].status = 'expired'
           }
 
@@ -57,9 +63,13 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           rowEntry.innerHTML = rowHTML
           children.push(rowEntry)
 
-          // change font color for whole row when product expired
+          // change font color for whole row when product expired / expiring soon
           if (data.products[i].status === 'expired') {
-            rowEntry.style.color = '#e43d40'
+            rowEntry.style.color = '#D41E00'
+          }
+
+          if (data.products[i].status === 'expiring soon') {
+            rowEntry.style.color = '#F5631A'
           }
         }
         productsTable.replaceChildren(...children)
