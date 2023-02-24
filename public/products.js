@@ -270,6 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
     else if (e.target === deleteAccount) {
       suspendInput = true
       try {
+        deleteAccount.style.display = 'none'
+        tableInformation.style.display = 'none'
+        logoff.style.display = 'none'
+
         const response = await fetch('/api/v1/user/delete', {
           method: 'DELETE',
           headers: {
@@ -284,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
           showing.style.display = 'none'
           logonRegister.style.display = 'block'
           showing = logonRegister
-          productsTable.replaceChildren(productsTableHeader) // don't want other users to see
+          productsTable.replaceChildren(productsTableHeader)
           message.textContent = 'The user was successfully deleted.'
         } else if (e.target === logon) {
           showing.style.display = 'none'
@@ -325,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status.value = 'new'
       addingProduct.textContent = 'add'
       tableInformation.style.display = 'none'
+      deleteAccount.style.display = 'none'
     } else if (e.target === editCancel) {
       showing.style.display = 'none'
       brand.value = ''
@@ -419,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
       suspendInput = false
     } // section 5
     else if (e.target.classList.contains('editButton')) {
+      deleteAccount.style.display = 'none'
       tableInformation.style.display = 'none'
       editProduct.dataset.id = e.target.dataset.id
       suspendInput = true

@@ -4,7 +4,7 @@ const { BadRequestError, NotFoundError } = require('../errors')
 const { capitalizeProductName, capitalizeProductCategory } = require('../utils/capitalize')
 
 const getAllProducts = async (req, res) => {
-  const sort = { expirationDate: 1 }
+  const sort = { brand: 1 }
   const products = await Product.find({ createdBy: req.user.userId }).sort(sort)
   res.status(StatusCodes.OK).json({ products, count: products.length })
 }
