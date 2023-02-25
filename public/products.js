@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const h1 = document.querySelector('h1')
   const tableInformation = document.getElementById('table-information')
 
-  // section 2
+  // display
   let showing = logonRegister
   let token = null
 
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.dispatchEvent(thisEvent)
   let suspendInput = false
 
-  // section 3
+  // click function
   document.addEventListener('click', async (e) => {
     if (suspendInput) {
       return // we don't want to act on buttons while doing async operations
@@ -233,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (password1.value !== password2.value) {
         message.textContent = 'The passwords entered do not match.'
       } else {
+        console.log('add line 236')
         suspendInput = true
         try {
           const response = await fetch('/api/v1/auth/register', {
@@ -251,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
             message.textContent = `Registration successful.  Welcome ${data.user.name}!`
             token = data.token
             localStorage.setItem('token', token)
+            console.log('token after register', token)
             showing.style.display = 'none'
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
@@ -274,13 +276,16 @@ document.addEventListener('DOMContentLoaded', () => {
         tableInformation.style.display = 'none'
         logoff.style.display = 'none'
 
+        console.log('token before delete', token)
         const response = await fetch('/api/v1/user/delete', {
+
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           }
         })
+        console.log('token after delete', token)
         const data = await response.json()
         if (response.status === 200) {
           localStorage.removeItem('token')
@@ -315,7 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         message.textContent = 'A communication error has occured.'
       }
       suspendInput = false
-      // section 4
+      // adding product
     } else if (e.target === addProduct) {
       showing.style.display = 'none'
       editProduct.style.display = 'block'
@@ -422,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       suspendInput = false
-    } // section 5
+    } // edit product
     else if (e.target.classList.contains('editButton')) {
       deleteAccount.style.display = 'none'
       tableInformation.style.display = 'none'

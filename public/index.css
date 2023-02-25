@@ -64,7 +64,7 @@ button:hover{
     font-size: 1.5rem;
     border:  solid;
     color: #D7D7D7;
-    margin: 10px;
+    margin: 10px 0;
     padding: 0 5px;
     border-radius: 20px;
 }
