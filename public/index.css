@@ -23,7 +23,7 @@ body{
 }
 
 #product-list{
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: bold;
     font-family: "Amatic SC", Calibri, Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
@@ -162,31 +162,31 @@ tr:nth-child(even) {
 
 /* web responsive */
 
+@media screen and (max-width: 426px) {
+
+    #logoff,
+    #delete-account{
+        align-items: center;
+        padding: 2px;
+        font-size: 1.3rem;
+    }
+
+    #footer{
+        font-size: 0.75rem;
+    }
+}
+
+
 @media screen and (max-width: 768px) {
 
     body{
-        background-size: 160%;
+        background-size: 200%;
     }
     
     .container{
         width: 100%;
         margin: 0 auto;
     }
-
-    table {
-        align-items: center;
-        width: 100%;
-        overflow-x: auto;
-    
-    }
-    th, td {
-        padding: 6px;
-    }
-
-    #footer{
-        font-size: 1.3rem;
-    }
-   
 }
 
 @media screen and (min-width:769px){
@@ -211,9 +211,9 @@ tr:nth-child(even) {
  
 }
       
-@media screen  and (max-width:1440px) {
+@media screen and (max-width:1440px) {
     body{
-        font-size: 1.7rem;
+        font-size: 1.5rem;
     }
     .email-logon,
     .password-logon,
@@ -228,10 +228,6 @@ tr:nth-child(even) {
         margin-top: 0;
     }
 
-    #footer{
-        font-size: 1.5rem;
-    }
-
     .name,
     .email,
     .password,
@@ -241,7 +237,9 @@ tr:nth-child(even) {
     }
 
     table {
+        align-items: center;
+        width: 100%;
         overflow-x: auto;
+    
     }
-
 }
