@@ -13,7 +13,7 @@ describe('post/api/v1/auth/login', () => {
       .send({ password: 'hellothere' })
       .end((err, res) => {
         res.should.have.status(400)
-        res.body.should.be.eql({ msg: 'Please provide email and password.' })
+        res.body.should.be.eql({ msg: 'Please provide a valid email and password.' })
         done()
       })
   })
@@ -24,7 +24,7 @@ describe('post/api/v1/auth/login', () => {
       .send({ email: 'hello@gmail.com' })
       .end((err, res) => {
         res.should.have.status(400)
-        res.body.should.eql({ msg: 'Please provide email and password.' })
+        res.body.should.eql({ msg: 'Please provide a valid email and password.' })
         done()
       })
   })

@@ -7,7 +7,7 @@ const register = async (req, res) => {
   req.body.name = capitalizeName(req.body.name)
   const user = await User.create({ ...req.body })
   const token = user.createJWT()
-  console.log('at line 10 token is', token)
+  // console.log('at line 10 token is', token)
   res
     .status(StatusCodes.CREATED)
     .json({ user: { name: user.name }, token })
@@ -17,7 +17,7 @@ const login = async (req, res) => {
   const { email, password } = req.body
 
   if (!email || !password) {
-    throw new BadRequestError('Please provide valid email and password.')
+    throw new BadRequestError('Please provide a valid email and password.')
   }
   const user = await User.findOne({ email })
 

@@ -17,6 +17,7 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
         for (let i = 0; i < data.products.length; i++) { // --for each products
           // convert opened and expiration date into user friendly form
           // refers to https://stackoverflow.com/questions/17545708/parse-date-without-timezone-javascript/39209842#39209842
+
           // Opened
           const openedUTC = new Date(data.products[i].opened)
           const offsetOpened = openedUTC.getTimezoneOffset() * 60000
@@ -233,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (password1.value !== password2.value) {
         message.textContent = 'The passwords entered do not match.'
       } else {
-        console.log('add line 236')
+        // console.log('add line 236')
         suspendInput = true
         try {
           const response = await fetch('/api/v1/auth/register', {
@@ -252,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
             message.textContent = `Registration successful.  Welcome ${data.user.name}!`
             token = data.token
             localStorage.setItem('token', token)
-            console.log('token after register', token)
+            // console.log('token after register', token)
             showing.style.display = 'none'
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
@@ -268,24 +269,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         suspendInput = false
       }
-    } // add delete account
-    else if (e.target === deleteAccount) {
+      // add delete account
+    } else if (e.target === deleteAccount) {
       suspendInput = true
       try {
         deleteAccount.style.display = 'none'
         tableInformation.style.display = 'none'
         logoff.style.display = 'none'
 
-        console.log('token before delete', token)
+        // console.log('token before delete', token)
         const response = await fetch('/api/v1/user/delete', {
 
           method: 'DELETE',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
           }
         })
-        console.log('token after delete', token)
+        // console.log('token after delete', token)
         const data = await response.json()
         if (response.status === 200) {
           localStorage.removeItem('token')
@@ -427,8 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       suspendInput = false
-    } // edit product
-    else if (e.target.classList.contains('editButton')) {
+      // edit product
+    } else if (e.target.classList.contains('editButton')) {
       deleteAccount.style.display = 'none'
       tableInformation.style.display = 'none'
       editProduct.dataset.id = e.target.dataset.id
@@ -466,8 +468,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       suspendInput = false
-    } // DELETE
-    else if (e.target.classList.contains('deleteButton')) {
+      // delete product
+    } else if (e.target.classList.contains('deleteButton')) {
       suspendInput = true
       try {
         const productID = e.target.dataset.id
