@@ -17,12 +17,41 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
         for (let i = 0; i < data.products.length; i++) { // --for each products
           // convert opened and expiration date into user friendly form
           // refers to https://stackoverflow.com/questions/17545708/parse-date-without-timezone-javascript/39209842#39209842
+
           // Opened
           const openedUTC = new Date(data.products[i].opened)
           const offsetOpened = openedUTC.getTimezoneOffset() * 60000
           data.products[i].opened = new Date(openedUTC.getTime() + offsetOpened).toLocaleDateString()
 
-          // Exp Date
+          // if exp date is not available and only open date and validity available
+          // condition 1:  only open date and validity(PAO) available, exp date: use calculationExp
+          const calculationExp = new Date(new Date(data.products[i].opened).setMonth(new Date(data.products[i].opened).getMonth() + data.products[i].validity))
+          if (data.products[i].expirationDate === null) {
+            data.products[i].expirationDate = calculationExp
+          }
+          // if open date, validity, exp available
+          //  condition 2: exp date still far from product validity after open, exp date: use the calculation above
+          if (calculationExp < new Date(data.products[i].expirationDate)) {
+            data.products[i].expirationDate = calculationExp
+          }
+
+          // condition 3: exp date less than product validity afater open, exp date: as input
+          if (calculationExp > new Date(data.products[i].expirationDate)) {
+            data.products[i].expirationDate = new Date(data.products[i].expirationDate)
+          }
+
+          // status change to expiring soon : 7 days before exp date
+          const oneWeek = new Date(new Date(data.products[i].expirationDate).setDate(new Date(data.products[i].expirationDate).getDate() - 7))
+          if (oneWeek < new Date()) {
+            data.products[i].status = 'expiring soon'
+          }
+
+          // if today passed the expiration date/today is the expiration date, the status of product will change automatically to expired
+          if (new Date() >= new Date(data.products[i].expirationDate)) {
+            data.products[i].status = 'expired'
+          }
+
+          // Expiration Date
           const expiredUTC = new Date(data.products[i].expirationDate)
           const offsetExpired = expiredUTC.getTimezoneOffset() * 60000
           data.products[i].expirationDate = new Date(expiredUTC.getTime() + offsetExpired).toLocaleDateString()
@@ -34,6 +63,15 @@ async function buildProductsTable (productsTable, productsTableHeader, token, me
           const rowEntry = document.createElement('tr')
           rowEntry.innerHTML = rowHTML
           children.push(rowEntry)
+
+          // change font color for whole row when product expired / expiring soon
+          if (data.products[i].status === 'expired') {
+            rowEntry.style.color = '#D41E00'
+          }
+
+          if (data.products[i].status === 'expiring soon') {
+            rowEntry.style.color = '#F5631A'
+          }
         }
         productsTable.replaceChildren(...children)
       }
@@ -81,18 +119,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const addingProduct = document.getElementById('adding-product')
   const productsMessage = document.getElementById('products-message')
   const editCancel = document.getElementById('edit-cancel')
-  const notification = document.getElementById('notification')
+  const deleteAccount = document.getElementById('delete-account')
+  const h1 = document.querySelector('h1')
+  const tableInformation = document.getElementById('table-information')
 
-  // section 2
+  // display
   let showing = logonRegister
   let token = null
+
   document.addEventListener('startDisplay', async () => {
     showing = logonRegister
     token = localStorage.getItem('token')
+
     if (token) {
       // if the user is logged in
-      notification.style.display = ''
+      h1.innerText = 'Product List'
       logoff.style.display = 'block'
+      deleteAccount.style.display = 'block'
       const count = await buildProductsTable(
         productsTable,
         productsTableHeader,
@@ -102,9 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (count > 0) {
         productsMessage.textContent = ''
         productsTable.style.display = 'block'
+        tableInformation.style.display = 'block'
       } else {
         productsMessage.textContent = 'There are no products to display for this user.'
         productsTable.style.display = 'none'
+        tableInformation.style.display = 'none'
       }
       products.style.display = 'block'
       showing = products
@@ -117,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.dispatchEvent(thisEvent)
   let suspendInput = false
 
-  // section 3
+  // click function
   document.addEventListener('click', async (e) => {
     if (suspendInput) {
       return // we don't want to act on buttons while doing async operations
@@ -132,7 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
       logonRegister.style.display = 'block'
       showing = logonRegister
       productsTable.replaceChildren(productsTableHeader) // don't want other users to see
+      h1.innerText = 'My Beauty Tracker'
       message.textContent = 'You are logged off.'
+      logoff.style.display = 'none'
+      deleteAccount.style.display = 'none'
+      tableInformation.style.display = 'none'
     } else if (e.target === logon) {
       showing.style.display = 'none'
       logonDiv.style.display = 'block'
@@ -166,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         const data = await response.json()
         if (response.status === 200) {
-          message.textContent = `Logon successful.  Welcome ${data.user.name}`
+          message.textContent = `Logon successful.  Welcome ${data.user.name}!`
           token = data.token
           localStorage.setItem('token', token)
           showing.style.display = 'none'
@@ -185,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (password1.value !== password2.value) {
         message.textContent = 'The passwords entered do not match.'
       } else {
+        // console.log('add line 236')
         suspendInput = true
         try {
           const response = await fetch('/api/v1/auth/register', {
@@ -200,9 +250,10 @@ document.addEventListener('DOMContentLoaded', () => {
           })
           const data = await response.json()
           if (response.status === 201) {
-            message.textContent = `Registration successful.  Welcome ${data.user.name}`
+            message.textContent = `Registration successful.  Welcome ${data.user.name}!`
             token = data.token
             localStorage.setItem('token', token)
+            // console.log('token after register', token)
             showing.style.display = 'none'
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
@@ -218,23 +269,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         suspendInput = false
       }
-    } // section 4
-    else if (e.target === addProduct) {
+      // add delete account
+    } else if (e.target === deleteAccount) {
+      suspendInput = true
+      try {
+        deleteAccount.style.display = 'none'
+        tableInformation.style.display = 'none'
+        logoff.style.display = 'none'
+
+        // console.log('token before delete', token)
+        const response = await fetch('/api/v1/user/delete', {
+
+          method: 'DELETE',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        })
+        // console.log('token after delete', token)
+        const data = await response.json()
+        if (response.status === 200) {
+          localStorage.removeItem('token')
+          token = null
+          showing.style.display = 'none'
+          logonRegister.style.display = 'block'
+          showing = logonRegister
+          productsTable.replaceChildren(productsTableHeader)
+          message.textContent = 'The user was successfully deleted.'
+        } else if (e.target === logon) {
+          showing.style.display = 'none'
+          logonDiv.style.display = 'block'
+          showing = logonDiv
+        } else if (e.target === register) {
+          showing.style.display = 'none'
+          registerDiv.style.display = 'block'
+          showing = registerDiv
+        } else if (e.target === logonCancel || e.target === registerCancel) {
+          showing.style.display = 'none'
+          logonRegister.style.display = 'block'
+          showing = logonRegister
+          email.value = ''
+          password.value = ''
+          name.value = ''
+          email1.value = ''
+          password1.value = ''
+          password2.value = ''
+        } else {
+          message.textContent = data.msg
+        }
+      } catch (err) {
+        message.textContent = 'A communication error has occured.'
+      }
+      suspendInput = false
+      // adding product
+    } else if (e.target === addProduct) {
       showing.style.display = 'none'
       editProduct.style.display = 'block'
       showing = editProduct
       delete editProduct.dataset.id
       brand.value = ''
-      category.value = 'skincare'
+      category.value = 'Skincare'
       opened.value = ''
       validity.value = ''
       expirationDate.value = ''
       status.value = 'new'
       addingProduct.textContent = 'add'
+      tableInformation.style.display = 'none'
+      deleteAccount.style.display = 'none'
     } else if (e.target === editCancel) {
       showing.style.display = 'none'
       brand.value = ''
-      category.value = 'skincare'
+      category.value = 'Skincare'
       opened.value = ''
       validity.value = ''
       expirationDate.value = ''
@@ -269,11 +375,11 @@ document.addEventListener('DOMContentLoaded', () => {
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
             brand.value = ''
-            category.value = 'skincare'
+            category.value = ''
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
-            status.value = 'new'
+            status.value = ''
           } else {
             // failure
             message.textContent = data.msg
@@ -308,11 +414,11 @@ document.addEventListener('DOMContentLoaded', () => {
             message.textContent = 'The entry was updated.'
             showing.style.display = 'none'
             brand.value = ''
-            category.value = 'skincare'
+            category.value = ''
             opened.value = ''
             validity.value = ''
             expirationDate.value = ''
-            status.value = 'new'
+            status.value = ''
             thisEvent = new Event('startDisplay')
             document.dispatchEvent(thisEvent)
           } else {
@@ -323,8 +429,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
       suspendInput = false
-    } // section 5
-    else if (e.target.classList.contains('editButton')) {
+      // edit product
+    } else if (e.target.classList.contains('editButton')) {
+      deleteAccount.style.display = 'none'
+      tableInformation.style.display = 'none'
       editProduct.dataset.id = e.target.dataset.id
       suspendInput = true
       try {
@@ -360,8 +468,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       suspendInput = false
-    } // DELETE
-    else if (e.target.classList.contains('deleteButton')) {
+      // delete product
+    } else if (e.target.classList.contains('deleteButton')) {
       suspendInput = true
       try {
         const productID = e.target.dataset.id

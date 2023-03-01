@@ -6,12 +6,12 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please provide name'],
-    minlength: 3,
-    maxlength: 50
+    minlength: [3, '\n Name must contain a minimum of 3 characters'],
+    maxlength: [20, '\n Name must within 20 characters']
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
+    required: [true, '\n Please provide email'],
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       'Please provide valid email'
@@ -20,10 +20,11 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide password'],
-    minlength: 6
+    required: [true, '\n Please provide password'],
+    minlength: [8, '\n Password must contain a minimum of 8 characters']
     // maxlength: 12,-->removed bcs hashed password generated more than 12 char
   }
+
 })
 
 UserSchema.pre('save', async function () {
@@ -32,6 +33,7 @@ UserSchema.pre('save', async function () {
 })
 
 UserSchema.methods.createJWT = function () {
+  // console.log('registering', this._id, this.name)
   return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME
   })

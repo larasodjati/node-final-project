@@ -5,128 +5,145 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products List</title>
+    <title>myBeautyTracker</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Averia+Serif+Libre&family=Balsamiq+Sans&family=Chelsea+Market&family=Fredoka+One&family=Dongle&family=Jua&family=Just+Another+Hand&family=Meera+Inimai&family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Products List</h1>
-    <div>
-    <button type="button" id="notification" style="display:none;">Notification</button>
-    </div>
-    <button type="button" id="logoff" style="display:none;">logoff</button>
-    <hr>
-    <p id="message"></p>
-    <hr>
-    <div id="logon-register" style="display:none;">
-        <button type="button" id="logon">logon</button>
-        <button type="button" id="register">register</button>
-    </div>
-    <div id="logon-div" style="display:none;">
-        <form>
+    <div class="container">
+        <header class="main-header">
             <div>
-                <label for="email">email:</label>
-                <input type="email" id="email">
-            </div>
-            <div>
-                <label for="password">password:</label>
-                <input type="password" id="password">
-            </div>
-            <button type="button" id="logon-button">logon</button>
-            <button type="button" id="logon-cancel">cancel</button>
-        </form>
-    </div>
-    <div id="register-div" style="display:none;">
-        <form>
-            <div>
-                <label for="name">name:</label>
-                <input type="text" id="name">
-            </div>
-            <div>
-                <label for="email1">email:</label>
-                <input type="email" id="email1">
-            </div>
-            <div>
-                <label for="password1">password:</label>
-                <input type="password" id="password1">
-            </div>
-            <div>
-                <label for="password2">verify password:</label>
-                <input type="password" id="password2">
-            </div>
-            <button type="button" id="register-button">register</button>
-            <button type="button" id="register-cancel">cancel</button>
-        </form>
-    </div>
-    
-    <div id="products" style="display:none;">
-        <p id="products-message"></p>
-        <table id="products-table" style="display:none;">
-            <tr id="products-table-header">
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Opened</th>
-                <th>PAO</th>
-                <th>Exp.Date</th>
-                <th>Status</th>
-                <th colspan="2"></th>
-            </tr>
-        </table>
-        <button type="button" id="add-product">add product</button>
-    </div>
-    <div id = "expired-products" style="display:none;">
-        <h2>Expired Products</h2>
-        <ul class="expired-list">
-
-        </ul>
-    </div>
-    <div id="edit-product" style="display:none;">
-        <form>
-            <div>
-                <label for="brand">Brand:</label>
-                <input type="text" id="brand">
-            </div>
-            <div>
-                <label for="category">Category:</label>
-                <select id="category">
-                    <option value="Bathbody">Bathbody</option>
-                    <option value="Fragrance">Fragrance</option> 
-                    <option value="Hair">Hair</option> 
-                    <option value="Handfoot">Handfoot</option> 
-                    <option value="Lips">Lips</option> 
-                    <option value="Makeup">Makeup</option>
-                    <option value="Skincare">Skincare</option>
-                    <option value="Vitamin">Vitamin</option>
-                </select>
-            </div>
-            <div>
-                <label for="opened">Product Opened:</label>
-                <input type="date" id="opened">
-            </div>
-            <div>
-                <label for="validity">Period After Open:</label>
-                <input type="text" id="validity">
-            </div>
-            <div>
-                <label for="expirationDate">Exp.Date:</label>
-                <input type="date" id="expirationDate">
-            </div>
-            <div>
-                <label for="status">Status:</label>
-                <select id="status">
-                    <option value="new">new</option>
-                    <option value="in-use">in-use</option>
-                    <option value="expired">expired</option>
-                </select>
-            </div>
-            <button type="button" id="adding-product">add</button>
-            <button type="button" id="edit-cancel">cancel</button>
-        </form>
-        <form method="post" enctype="multipart/form-data" action="/upload">
-            <input type="file" name="file">
-            <input type="submit" value="Submit">
-        </form>
+                <button type="button" id="logoff" style="display:none">logoff</button>
+            </div>    
+              
+        </header>
+        <br>
+        <div>
+            <h1 id="product-list">My Beauty Tracker</h1>
+        </div>     
         
+        <hr>
+        <p id="message"></p>
+        <hr>
+        <div id="logon-register" style="display:none;">
+            <button type="button" id="logon">login</button>
+            <button type="button" id="register">register</button>
+        </div>
+        <div id="logon-div" style="display:none;">
+            <form>
+                <div class="row">
+                    <label for="email" class="email-logon">email:</label>
+                    <input type="email" id="email" class="input-logon" placeholder="enter your email">
+                </div>
+                <div class="row">
+                    <label for="password" class="password-logon">password:</label>
+                    <input type="password" id="password" class="input-logon" placeholder="enter your password">
+                </div>
+                <button type="button" id="logon-button">login</button>
+                <button type="button" id="logon-cancel">cancel</button>
+            </form>
+        </div>
+        <div id="register-div" style="display:none;">
+            <form>
+                <div class="row">
+                    <label for="name" class="name">name:</label>
+                    <input type="text" id="name" class="input-register" placeholder="enter your name">
+                </div>
+                <div class="row">
+                    <label for="email1" class="email">email:</label>
+                    <input type="email" id="email1" class="input-register" placeholder="enter your valid email">
+                </div>
+                <div class="row">
+                    <label for="password1" class="password">password:</label>
+                    <input type="password" id="password1" class="input-register" placeholder="min. 8 characters">
+                </div>
+                <div class="row">
+                    <label for="password2" class="password">verify password:</label>
+                    <input type="password" id="password2" class="input-register" placeholder="re-type password">
+                </div>
+                <button type="button" id="register-button">register</button>
+                <button type="button" id="register-cancel">cancel</button>
+            </form>
+        </div>
         
-    <script src="./products.js"></script>   
+        <div id="products" style="display:none;">
+            <p id="products-message"></p>
+            <table id="products-table" style="display:none;">
+                <tr id="products-table-header">
+                    <th>Brand</th>
+                    <th>Category</th>
+                    <th>Opened</th>
+                    <th>PAO</th>
+                    <th>Exp.Date</th>
+                    <th>Status</th>
+                    <th colspan="4"></th>
+                </tr>
+            </table>
+            <button type="button" id="add-product">add product</button>
+        </div>
+        
+        <div id="table-information" style="display:none">
+            <h4>Table Information</h4>
+            <p><i>&#42 Opened: date when the the product has been opened for the first time </i></p>
+            <p><i>&#42 PAO (Period after opening) : identifies the useful lifetime of a product after opening</i></p>
+        </div>
+       
+        <div id="edit-product" style="display:none;">
+            <form>
+                <div class="row">
+                    <label for="brand" class="label-product">Brand:</label>
+                    <input type="text" id="brand" class="input-product" placeholder="brand name">
+                </div>
+                <div class="row">
+                    <label for="category" class="label-product">Category:</label>
+                    <select id="category" class="input-product">
+                        <option value="Bathbody">Bathbody</option>
+                        <option value="Fragrance">Fragrance</option> 
+                        <option value="Hair">Hair</option> 
+                        <option value="Handfoot">Handfoot</option> 
+                        <option value="Lips">Lips</option> 
+                        <option value="Makeup">Makeup</option>
+                        <option value="Skincare">Skincare</option>
+                        <option value="Sunscreen">Sunscreen</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="opened" label="label-product">Product Opened:</label>
+                    <input type="date" id="opened" class="input-product">
+                </div>
+                <div class="row">
+                    <label for="validity" label="label-product">Period After Opening(validity):</label>
+                    <input type="text" id="validity" class="input-product" placeholder="in months">
+                </div>
+                <div class="row">
+                    <label for="expirationDate" label="label-product">Exp.Date:</label>
+                    <input type="date" id="expirationDate" class="input-product">
+                </div>
+                <div class="row">
+                    <label for="status" label="label-product">Status:</label>
+                    <select id="status" class="input-product">
+                        <option value="new">new</option>
+                        <option value="in-use">in-use</option>
+                        <option value="expiring soon">expiring soon</option>
+                        <option value="expired">expired</option>
+                    </select>
+                </div>
+                <button type="button" id="adding-product">add</button>
+                <button type="button" id="edit-cancel">cancel</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <button type="button" id="delete-account" style="display:none">delete account</button> 
+        </div>
+        <footer id="footer">
+            Copyright&copy; 2023 Larasati Sodjati
+        </footer>
+        <script src="./products.js"></script>   
+    </div>
 </body>
 </html>
