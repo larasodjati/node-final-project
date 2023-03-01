@@ -290,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // console.log('token after delete', token)
         const data = await response.json()
         if (response.status === 200) {
+          h1.innerText = 'My Beauty Tracker'
           localStorage.removeItem('token')
           token = null
           showing.style.display = 'none'
